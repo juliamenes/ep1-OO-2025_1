@@ -9,26 +9,86 @@ O enunciado do trabalho pode ser encontrado aqui:
 
 ## Dados do Aluno
 
-- **Nome completo:** [Preencher aqui]
-- **Matrícula:** [Preencher aqui]
-- **Curso:** [Preencher aqui]
-- **Turma:** [Preencher aqui]
+- **Nome completo:** Júlia Pêgo de Meneses
+- **Matrícula:** 231037745
+- **Curso:** Engenharia de Software
+- **Turma:** T06
 
 ---
 
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
-   [Descrever aqui como compilar o projeto. Exemplo: `javac Main.java` ou o script usado]
+   javac SistemaAlunos.java  
+   java SistemaAlunos    
 
 2. **Execução:**  
-   [Descrever aqui como executar o projeto. Exemplo: `java Main` ou o script usado]
+-Inicialização
+O método main em SistemaAlunos.java é chamado pela Máquina Virtual Java (JVM).
+-Carregamento dos Dados
+Um novo objeto SistemaAlunos é criado. O método carregarDados() carrega dados existentes dos arquivos CSV (se houver) para:
+List<Aluno> alunos
+List<Disciplina> disciplinas
+List<Professor> professores
+-Menu Principal
+O método exibirMenu() exibe o menu interativo:
+=== SISTEMA ACADÊMICO ===
+1. Gerenciar Alunos
+2. Gerenciar Disciplinas
+... (etc.)
+O programa aguarda a entrada do usuário (opções de 1 a 6).
+-Interação com o Usuário
+Dependendo da opção escolhida, os métodos como menuAlunos(), menuDisciplinas(), etc., são chamados.
+Exemplo: Ao selecionar "1. Gerenciar Alunos", ocorre:
+Abertura de um sub-menu para cadastrar, editar ou listar alunos.
+São chamados métodos como cadastrarAluno() ou listarAlunos().
+-Persistência dos Dados
+Ao escolher a opção "6. Salvar e Sair", o método salvarDados():
+Grava todas as alterações de volta nos arquivos CSV (alunos.csv, disciplinas.csv, etc.).
+Garante que os dados sejam preservados para a próxima vez que o programa for executado.
 
 3. **Estrutura de Pastas:**  
-   [Descrever aqui as principais pastas do projeto]
+-Pasta principal "EP1"
+É o diretório principal do projeto, contem todas as subpastas.
+-Subpasta "data"
+Armazena todos os arquivos de dados (CSVs).
+-Subpasta "src"
+Contém todos os arquivos de código-fonte, arquivos .java em Java.
+-Subpasta "bin"
+Armazena arquivos .class compilados.
+EP1/
+├── src/
+│   ├── SistemaAlunos.java
+│   └── Aluno.java
+│   └── AlunoCsvFormatter.java
+│   └── AlunoEspecial.java
+│   └── CsvService.java
+│   └── Disciplina.java
+│   └── DisciplinaCsvFormatter.java
+│   └── Professor.java
+│   └── ProfessorCsvFormatter.java
+│   └── SistemaAlunos.java
+│   └── Turma.java
+├── bin/ 
+│   ├── SistemaAlunos.class
+│   └── Aluno.class
+│   └── AlunoCsvFormatter.class
+│   └── AlunoEspecial.class
+│   └── CsvService.class
+│   └── Disciplina.class
+│   └── DisciplinaCsvFormatter.class
+│   └── Professor.class
+│   └── ProfessorCsvFormatter.class
+│   └── SistemaAlunos.class
+│   └── Turma.class           
+└── data/
+    ├── alunos.csv
+    └── disciplinas.csv
+    └── professores.csv
+    └── turmas.csv
 
 3. **Versão do JAVA utilizada:**  
-   [Descrever aqui como versão do JAVA utilizada no projeto. Sugestão: `java 21`]
+   Foi utilizado a versão Java 24 (JDK 24).
 
 ---
 
@@ -73,4 +133,4 @@ O enunciado do trabalho pode ser encontrado aqui:
 
 ## Contato
 
-- [Opcional: E-mail pessoal do aluno.]
+- juliamenes1403@gmail.com
