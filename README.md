@@ -93,7 +93,12 @@ EP1/
 │   ├── DisciplinaCsvFormatter.class
 │   ├── Professor.class
 │   ├── ProfessorCsvFormatter.class
-│   └── Turma.class
+│   └── Turma.class           
+└── data/
+    ├── alunos.csv
+    └── disciplinas.csv
+    └── professores.csv
+    └── turmas.csv
 ```
 
 3. **Versão do JAVA utilizada:**  
