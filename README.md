@@ -56,38 +56,32 @@ Armazena todos os arquivos de dados (CSVs).
 Contém todos os arquivos de código-fonte, arquivos .java em Java.
 -Subpasta "bin"
 Armazena arquivos .class compilados.
-'''
+```
 EP1/
 ├── src/
 │   ├── SistemaAlunos.java
-│   └── Aluno.java
-│   └── AlunoCsvFormatter.java
-│   └── AlunoEspecial.java
-│   └── CsvService.java
-│   └── Disciplina.java
-│   └── DisciplinaCsvFormatter.java
-│   └── Professor.java
-│   └── ProfessorCsvFormatter.java
-│   └── SistemaAlunos.java
+│   ├── Aluno.java
+│   ├── AlunoCsvFormatter.java
+│   ├── AlunoEspecial.java
+│   ├── CsvService.java
+│   ├── Disciplina.java
+│   ├── DisciplinaCsvFormatter.java
+│   ├── Professor.java
+│   ├── ProfessorCsvFormatter.java
+│   ├── SistemaAlunos.java
 │   └── Turma.java
-├── bin/ 
+├── bin/
 │   ├── SistemaAlunos.class
-│   └── Aluno.class
-│   └── AlunoCsvFormatter.class
-│   └── AlunoEspecial.class
-│   └── CsvService.class
-│   └── Disciplina.class
-│   └── DisciplinaCsvFormatter.class
-│   └── Professor.class
-│   └── ProfessorCsvFormatter.class
-│   └── SistemaAlunos.class
-│   └── Turma.class           
-└── data/
-    ├── alunos.csv
-    └── disciplinas.csv
-    └── professores.csv
-    └── turmas.csv
-   '''
+│   ├── Aluno.class
+│   ├── AlunoCsvFormatter.class
+│   ├── AlunoEspecial.class
+│   ├── CsvService.class
+│   ├── Disciplina.class
+│   ├── DisciplinaCsvFormatter.class
+│   ├── Professor.class
+│   ├── ProfessorCsvFormatter.class
+│   └── Turma.class
+```
 
 3. **Versão do JAVA utilizada:**  
    Foi utilizado a versão Java 24 (JDK 24).
