@@ -19,43 +19,56 @@ O enunciado do trabalho pode ser encontrado aqui:
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
+   ```bash
    javac SistemaAlunos.java  
-   java SistemaAlunos    
+   java SistemaAlunos
 
 2. **Execução:**  
--Inicialização
-O método main em SistemaAlunos.java é chamado pela Máquina Virtual Java (JVM).
--Carregamento dos Dados
-Um novo objeto SistemaAlunos é criado. O método carregarDados() carrega dados existentes dos arquivos CSV (se houver) para:
-List<Aluno> alunos
-List<Disciplina> disciplinas
-List<Professor> professores
--Menu Principal
-O método exibirMenu() exibe o menu interativo:
-=== SISTEMA ACADÊMICO ===
-1. Gerenciar Alunos
-2. Gerenciar Disciplinas
-... (etc.)
-O programa aguarda a entrada do usuário (opções de 1 a 6).
--Interação com o Usuário
-Dependendo da opção escolhida, os métodos como menuAlunos(), menuDisciplinas(), etc., são chamados.
-Exemplo: Ao selecionar "1. Gerenciar Alunos", ocorre:
-Abertura de um sub-menu para cadastrar, editar ou listar alunos.
-São chamados métodos como cadastrarAluno() ou listarAlunos().
--Persistência dos Dados
-Ao escolher a opção "6. Salvar e Sair", o método salvarDados():
-Grava todas as alterações de volta nos arquivos CSV (alunos.csv, disciplinas.csv, etc.).
-Garante que os dados sejam preservados para a próxima vez que o programa for executado.
+
+   - **Inicialização**  
+     O método `main` em `SistemaAlunos.java` é chamado pela Máquina Virtual Java (JVM).  
+
+   - **Carregamento dos Dados**  
+     Um novo objeto `SistemaAlunos` é criado. O método `carregarDados()` carrega dados existentes dos arquivos CSV (se houver) para:  
+     - `List<Aluno> alunos`  
+     - `List<Disciplina> disciplinas`  
+     - `List<Professor> professores`  
+
+   - **Menu Principal**  
+     O método `exibirMenu()` exibe o menu interativo:  
+     ```
+     === SISTEMA ACADÊMICO ===
+     1. Gerenciar Alunos
+     2. Gerenciar Disciplinas
+     ... (etc.)
+     ```  
+     O programa aguarda a entrada do usuário (opções de 1 a 6).  
+
+   - **Interação com o Usuário**  
+     Dependendo da opção escolhida, os métodos como `menuAlunos()`, `menuDisciplinas()`, etc., são chamados.  
+     Exemplo: Ao selecionar "1. Gerenciar Alunos", ocorre:  
+     - Abertura de um sub-menu para cadastrar, editar ou listar alunos  
+     - São chamados métodos como `cadastrarAluno()` ou `listarAlunos()`  
+
+   - **Persistência dos Dados**  
+     Ao escolher a opção "6. Salvar e Sair", o método `salvarDados()`:  
+     - Grava todas as alterações de volta nos arquivos CSV (`alunos.csv`, `disciplinas.csv`, etc.)  
+     - Garante que os dados sejam preservados para a próxima execução  
 
 3. **Estrutura de Pastas:**  
--Pasta principal "EP1"
-É o diretório principal do projeto, contem todas as subpastas.
--Subpasta "data"
-Armazena todos os arquivos de dados (CSVs).
--Subpasta "src"
-Contém todos os arquivos de código-fonte, arquivos .java em Java.
--Subpasta "bin"
-Armazena arquivos .class compilados.
+
+   - **Pasta principal "EP1"**  
+     É o diretório principal do projeto, contendo todas as subpastas.  
+
+   - **Subpasta "data"**  
+     Armazena todos os arquivos de dados (CSVs).  
+
+   - **Subpasta "src"**  
+     Contém todos os arquivos de código-fonte (.java).  
+
+   - **Subpasta "bin"**  
+     Armazena arquivos .class compilados.
+     
 ```
 EP1/
 ├── src/
