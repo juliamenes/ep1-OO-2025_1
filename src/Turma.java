@@ -78,12 +78,16 @@ public class Turma {
         return faltasPorAluno.getOrDefault(aluno, 0);
     }
 
+    public String getMetodoAvaliacao() {
+        return metodoAvaliacao;
+    }
+
     public double calcularMedia(Aluno aluno) {
         Map<String, Double> notas = getNotas(aluno);
         if (notas.isEmpty())
             return 0.0;
 
-        if (metodoAvaliacao.equals("Método 1")) {
+        if (this.metodoAvaliacao.equals("Método 1")) {
             return (notas.getOrDefault("P1", 0.0) +
                     notas.getOrDefault("P2", 0.0) +
                     notas.getOrDefault("P3", 0.0) +
@@ -124,10 +128,6 @@ public class Turma {
 
     public String getSemestre() {
         return semestre;
-    }
-
-    public String getMetodoAvaliacao() {
-        return metodoAvaliacao;
     }
 
     public boolean isPresencial() {
