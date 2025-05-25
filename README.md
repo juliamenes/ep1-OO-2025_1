@@ -115,7 +115,7 @@ EP1/
 ## Prints da Execução
 
 1. Menu Principal:  
-   ![Inserir Print 1](![MenuPrincipal](https://github.com/user-attachments/assets/1c089ca1-3586-4245-a5d7-379990b0ecf3)
+   ![Inserir Print 1](caminho/do/print1.png)
 )
 
 2. Cadastro de Aluno:  
