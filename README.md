@@ -115,13 +115,14 @@ EP1/
 ## Prints da Execução
 
 1. Menu Principal:  
-   ![Inserir Print 1](caminho/do/print1.png)
+   ![MenuPrincipal](https://github.com/user-attachments/assets/5e8321d7-3faa-4e24-be74-439804aa1d9c)
 )
 
 2. Cadastro de Aluno:  
-   ![Inserir Print 2](caminho/do/print2.png)
+   ![CadastroAluno](https://github.com/user-attachments/assets/ab04e400-7e89-499a-bf5a-d90290270411)
 
 3. Relatório de Frequência/Notas:  
+
    ![Inserir Print 3](caminho/do/print3.png)
 
 ---
