@@ -56,6 +56,7 @@ Armazena todos os arquivos de dados (CSVs).
 Contém todos os arquivos de código-fonte, arquivos .java em Java.
 -Subpasta "bin"
 Armazena arquivos .class compilados.
+'''
 EP1/
 ├── src/
 │   ├── SistemaAlunos.java
@@ -86,6 +87,7 @@ EP1/
     └── disciplinas.csv
     └── professores.csv
     └── turmas.csv
+   '''
 
 3. **Versão do JAVA utilizada:**  
    Foi utilizado a versão Java 24 (JDK 24).
