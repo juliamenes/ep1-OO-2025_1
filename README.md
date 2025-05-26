@@ -108,7 +108,7 @@ EP1/
 
 ## Vídeo de Demonstração
 
-- [Inserir o link para o vídeo no YouTube/Drive aqui]
+- https://drive.google.com/file/d/1N6N-mqirj0biYKKDwiSlhvipr48ly9mP/view?usp=sharing
 
 ---
 
@@ -129,15 +129,15 @@ EP1/
 
 ## Principais Funcionalidades Implementadas
 
-- [ ] Cadastro, listagem, matrícula e trancamento de alunos (Normais e Especiais)
-- [ ] Cadastro de disciplinas e criação de turmas (presenciais e remotas)
-- [ ] Matrícula de alunos em turmas, respeitando vagas e pré-requisitos
-- [ ] Lançamento de notas e controle de presença
-- [ ] Cálculo de média final e verificação de aprovação/reprovação
-- [ ] Relatórios de desempenho acadêmico por aluno, turma e disciplina
-- [ ] Persistência de dados em arquivos (.txt ou .csv)
-- [ ] Tratamento de duplicidade de matrículas
-- [ ] Uso de herança, polimorfismo e encapsulamento
+- [✓] Cadastro, listagem, matrícula e trancamento de alunos (Normais e Especiais)
+- [✓] Cadastro de disciplinas e criação de turmas (presenciais e remotas)
+- [✓] Matrícula de alunos em turmas, respeitando vagas e pré-requisitos
+- [✓] Lançamento de notas e controle de presença
+- [✓] Cálculo de média final e verificação de aprovação/reprovação
+- [✓] Relatórios de desempenho acadêmico por aluno, turma e disciplina
+- [✓] Persistência de dados em arquivos (.txt ou .csv)
+- [✓] Tratamento de duplicidade de matrículas
+- [✓] Uso de herança, polimorfismo e encapsulamento
 
 ---
 
