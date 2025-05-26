@@ -123,7 +123,7 @@ EP1/
 
 3. Relatório de Frequência/Notas:  
 
-   ![Inserir Print 3](caminho/do/print3.png)
+   ![Relatorio](https://github.com/user-attachments/assets/ad4b1283-27bf-44a4-a81e-28f0b839b798)
 
 ---
 
@@ -143,7 +143,7 @@ EP1/
 
 ## Observações (Extras ou Dificuldades)
 
-- [Espaço para o aluno comentar qualquer funcionalidade extra que implementou, dificuldades enfrentadas, ou considerações importantes.]
+- Como o vídeo não podia exceder 5 minutos, algumas funcionalidades que foram solicitadas no enunciado do trabalho eu fiz mas acabei por não mostrar (é possível verificar no codigo SistemaAlunos.java na pasta src, la em cima). Em relação ao print de "Relatório de Frequência/Notas", eu coloquei outras modos de mostrar os relatorios, o print mostra o modo de relatorio "2.Por Professor", além desse tem "3.Por Aluno" e "1.Por Disciplina", o propósito seria basicamente no 1., ver todas as ofertas de um curso específico, comparar o desempenho entre diferentes turmas da mesma disciplina, verificar quais professores lecionam cada seção. No 2. ver a avaliação de desempenho do professor, ver a carga horária de ensino de um professor, identificar alunos com dificuldades em suas aulas. E no 3. verificar o progresso acadêmico de um aluno, tanto de disciplinas atuais, como disciplinas passadas.
 
 ---
 
