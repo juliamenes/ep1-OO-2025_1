@@ -122,7 +122,6 @@ public class SistemaAlunos {
                                 Integer.parseInt(parts[8]),
                                 Integer.parseInt(parts[9]));
 
-                        // Load enrolled students
                         if (parts.length >= 11 && !parts[10].isEmpty()) {
                             Arrays.stream(parts[10].split(";"))
                                     .map(this::buscarAlunoPorMatricula)
@@ -130,7 +129,6 @@ public class SistemaAlunos {
                                     .forEach(turma::matricularAluno);
                         }
 
-                        // Load grades if the field exists
                         if (parts.length >= 12 && !parts[11].isEmpty()) {
                             Arrays.stream(parts[11].split(";"))
                                     .filter(s -> !s.isEmpty())
@@ -157,7 +155,6 @@ public class SistemaAlunos {
                                     });
                         }
 
-                        // Load absences if the field exists
                         if (parts.length >= 13 && !parts[12].isEmpty()) {
                             Arrays.stream(parts[12].split(";"))
                                     .filter(s -> !s.isEmpty())
@@ -187,7 +184,6 @@ public class SistemaAlunos {
         }
     }
 
-    // Helper method to parse CSV lines with quoted fields
     private String[] parseCsvLine(String line) {
         List<String> values = new ArrayList<>();
         String[] parts = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
@@ -329,8 +325,11 @@ public class SistemaAlunos {
         System.out.print("Semestre (ex: 2024.1): ");
         String semestre = scanner.nextLine();
 
-        System.out.print("Método de avaliação: ");
-        String metodoAvaliacao = scanner.nextLine();
+        System.out.println("\nMétodo de avaliação:");
+        System.out.println("1. Média simples (P1 + P2 + P3 + L + S) / 5");
+        System.out.println("2. Média ponderada (P1*1 + P2*2 + P3*3 + L + S) / 8");
+        System.out.print("Escolha o método (1 ou 2): ");
+        String metodo = scanner.nextLine().equals("1") ? "Método 1" : "Método 2";
 
         System.out.print("Presencial? (S/N): ");
         boolean presencial = scanner.nextLine().equalsIgnoreCase("S");
@@ -355,7 +354,7 @@ public class SistemaAlunos {
                 codigoTurma,
                 professor,
                 semestre,
-                metodoAvaliacao,
+                metodo,
                 presencial,
                 sala,
                 horario,
@@ -713,7 +712,7 @@ public class SistemaAlunos {
                 notas.forEach((tipo, nota) -> System.out.printf("- %s: %.1f\n", tipo, nota));
             }
 
-            System.out.print("Tipo de avaliação (P1/P2/P3/Trabalho/etc): ");
+            System.out.print("Tipo de avaliação (P1/P2/P3/L/S): ");
             String tipo = scanner.nextLine();
 
             System.out.print("Nota (0-10): ");
@@ -836,81 +835,15 @@ public class SistemaAlunos {
 
     public void gerarRelatorios() {
         System.out.println("\n--- RELATÓRIOS ---");
-        System.out.println("1. Por turma");
-        System.out.println("2. Por disciplina");
-        System.out.println("3. Por professor");
-        System.out.println("4. Por aluno");
+        System.out.println("1. Por Disciplina");
+        System.out.println("2. Por professor");
+        System.out.println("3. Por aluno");
         System.out.print("Opção: ");
 
         switch (scanner.nextLine()) {
-            case "1" -> relatorioPorTurma();
-            case "2" -> relatorioPorDisciplina();
-            case "3" -> relatorioPorProfessor();
-            case "4" -> relatorioPorAluno();
-        }
-    }
-
-    private void relatorioPorTurma() {
-        System.out.print("Código da turma: ");
-        String codigoTurma = scanner.nextLine();
-
-        Optional<Turma> turmaEncontrada = disciplinas.stream()
-                .flatMap(d -> d.getTurmas().stream())
-                .filter(t -> t.getCodigo().equalsIgnoreCase(codigoTurma.trim()))
-                .findFirst();
-
-        if (turmaEncontrada.isPresent()) {
-            Turma turma = turmaEncontrada.get();
-            System.out.printf("\n=== RELATÓRIO DA TURMA %s ===\n", turma.getCodigo());
-            System.out.printf("Disciplina: %s\n", turma.getDisciplina().getNome());
-            System.out.printf("Professor: %s\n", turma.getProfessor().getNome());
-            System.out.printf("Horário: %s | %s\n", turma.getHorario(),
-                    turma.isPresencial() ? "Presencial" : "Remoto");
-            System.out.printf("Total de alunos: %d\n\n", turma.getAlunosMatriculados().size());
-
-            if (turma.getAlunosMatriculados().isEmpty()) {
-                System.out.println("Nenhum aluno matriculado nesta turma.");
-            } else {
-                System.out.println("ALUNOS MATRICULADOS:");
-                System.out.println("--------------------------------------------------");
-                System.out.printf("%-30s %-8s %-12s %s\n", "Nome", "Média", "Frequência", "Situação");
-                System.out.println("--------------------------------------------------");
-
-                turma.getAlunosMatriculados().forEach(aluno -> {
-                    System.out.printf("%-30s %-8.1f %-12.1f%% %s\n",
-                            aluno.getNome(),
-                            turma.calcularMedia(aluno),
-                            turma.calcularFrequencia(aluno),
-                            turma.verificarAprovacao(aluno));
-                });
-
-                double mediaTurma = turma.getAlunosMatriculados().stream()
-                        .mapToDouble(turma::calcularMedia)
-                        .average()
-                        .orElse(0.0);
-
-                double freqMedia = turma.getAlunosMatriculados().stream()
-                        .mapToDouble(turma::calcularFrequencia)
-                        .average()
-                        .orElse(0.0);
-
-                long aprovados = turma.getAlunosMatriculados().stream()
-                        .filter(a -> turma.verificarAprovacao(a).equals("Aprovado"))
-                        .count();
-
-                System.out.println("--------------------------------------------------");
-                System.out.printf("RESUMO: Média da turma: %.1f | Frequência média: %.1f%% | Aprovados: %d/%d\n",
-                        mediaTurma, freqMedia, aprovados, turma.getAlunosMatriculados().size());
-            }
-        } else {
-            System.out.println("\nTurma não encontrada! Verifique o código digitado.");
-            System.out.println("Turmas disponíveis:");
-            disciplinas.stream()
-                    .flatMap(d -> d.getTurmas().stream())
-                    .forEach(t -> System.out.printf("- %s (%s - %s)\n",
-                            t.getCodigo(),
-                            t.getDisciplina().getNome(),
-                            t.getHorario()));
+            case "1" -> relatorioPorDisciplina();
+            case "2" -> relatorioPorProfessor();
+            case "3" -> relatorioPorAluno();
         }
     }
 
@@ -965,54 +898,79 @@ public class SistemaAlunos {
     }
 
     private void relatorioPorDisciplina() {
-        System.out.print("Código da disciplina: ");
-        String codigo = scanner.nextLine();
-        Disciplina disciplina = buscarDisciplinaPorCodigo(codigo);
+        System.out.println("\n--- RELATÓRIO POR DISCIPLINA ---");
+        System.out.println("Disciplinas disponíveis:");
+        disciplinas.forEach(d -> System.out.printf("- %s (%s)\n", d.getNome(), d.getCodigo()));
 
-        if (disciplina != null) {
-            System.out.printf("\nRELATÓRIO DA DISCIPLINA: %s (%s)\n",
-                    disciplina.getNome(), disciplina.getCodigo());
-            System.out.println("Carga horária: " + disciplina.getCargaHoraria() + "h");
-            System.out.println("Pré-requisitos: " + String.join(", ", disciplina.getPrerequisitos()));
-            System.out.println("\nTURMAS OFERECIDAS:");
+        System.out.print("\nCódigo da disciplina: ");
+        Disciplina disciplina = buscarDisciplinaPorCodigo(scanner.nextLine());
 
-            disciplina.getTurmas().forEach(turma -> {
-                System.out.println("\nTurma: " + turma.getCodigo());
-                System.out.println("Professor: " + turma.getProfessor().getNome());
-                System.out.println("Horário: " + turma.getHorario());
-                System.out.println("Vagas: " + turma.getVagasDisponiveis() + "/" + turma.getCapacidadeMaxima());
-                System.out.println("Método avaliação: " + turma.getMetodoAvaliacao());
-
-                System.out.println("\nDESEMPENHO DOS ALUNOS:");
-                turma.getAlunosMatriculados().forEach(aluno -> {
-                    System.out.printf("- %s (%s): Média %.1f | Frequência %.1f%% | %s\n",
-                            aluno.getNome(),
-                            aluno.getMatricula(),
-                            turma.calcularMedia(aluno),
-                            turma.calcularFrequencia(aluno),
-                            turma.verificarAprovacao(aluno));
-                });
-
-                double mediaTurma = turma.getAlunosMatriculados().stream()
-                        .mapToDouble(turma::calcularMedia)
-                        .average()
-                        .orElse(0.0);
-
-                double freqMedia = turma.getAlunosMatriculados().stream()
-                        .mapToDouble(turma::calcularFrequencia)
-                        .average()
-                        .orElse(0.0);
-
-                long aprovados = turma.getAlunosMatriculados().stream()
-                        .filter(a -> turma.verificarAprovacao(a).equals("Aprovado"))
-                        .count();
-
-                System.out.printf("\nRESUMO: Média da turma: %.1f | Frequência média: %.1f%% | Aprovados: %d/%d\n\n",
-                        mediaTurma, freqMedia, aprovados, turma.getAlunosMatriculados().size());
-            });
-        } else {
+        if (disciplina == null) {
             System.out.println("Disciplina não encontrada!");
+            return;
         }
+
+        System.out.println("\nTurmas disponíveis para " + disciplina.getNome() + ":");
+        if (disciplina.getTurmas().isEmpty()) {
+            System.out.println("Nenhuma turma cadastrada para esta disciplina!");
+            return;
+        }
+
+        disciplina.getTurmas().forEach(t -> System.out.printf("- %s (Prof. %s, %s, %d alunos)\n",
+                t.getCodigo(),
+                t.getProfessor().getNome(),
+                t.getHorario(),
+                t.getAlunosMatriculados().size()));
+
+        System.out.print("\nCódigo da turma: ");
+        String codigoTurma = scanner.nextLine();
+
+        Turma turma = disciplina.getTurmas().stream()
+                .filter(t -> t.getCodigo().equalsIgnoreCase(codigoTurma))
+                .findFirst()
+                .orElse(null);
+
+        if (turma == null) {
+            System.out.println("Turma não encontrada!");
+            return;
+        }
+        System.out.printf("\n=== RELATÓRIO DETALHADO ===\n");
+        System.out.printf("Disciplina: %s (%s)\n", disciplina.getNome(), disciplina.getCodigo());
+        System.out.printf("Turma: %s | Professor: %s\n", turma.getCodigo(), turma.getProfessor().getNome());
+        System.out.printf("Horário: %s | %s\n", turma.getHorario(), turma.isPresencial() ? "Presencial" : "Remoto");
+        System.out.printf("Método de avaliação: %s | Total de aulas: %d\n", turma.getMetodoAvaliacao(),
+                turma.getTotalAulas());
+
+        System.out.println("\nALUNOS MATRICULADOS (" + turma.getAlunosMatriculados().size() + "):");
+        System.out.println("------------------------------------------------------------");
+        System.out.printf("%-25s %-10s %-12s %s\n", "NOME", "MÉDIA", "FREQUÊNCIA", "SITUAÇÃO");
+        System.out.println("------------------------------------------------------------");
+
+        turma.getAlunosMatriculados().forEach(aluno -> {
+            System.out.printf("%-25s %-10.1f %-12.1f%% %s\n",
+                    aluno.getNome(),
+                    turma.calcularMedia(aluno),
+                    turma.calcularFrequencia(aluno),
+                    turma.verificarAprovacao(aluno));
+        });
+
+        double mediaTurma = turma.getAlunosMatriculados().stream()
+                .mapToDouble(turma::calcularMedia)
+                .average()
+                .orElse(0.0);
+
+        double freqMedia = turma.getAlunosMatriculados().stream()
+                .mapToDouble(turma::calcularFrequencia)
+                .average()
+                .orElse(0.0);
+
+        long aprovados = turma.getAlunosMatriculados().stream()
+                .filter(a -> turma.verificarAprovacao(a).equals("Aprovado"))
+                .count();
+
+        System.out.println("------------------------------------------------------------");
+        System.out.printf("RESUMO: Média da turma: %.1f | Frequência média: %.1f%% | Aprovados: %d/%d\n\n",
+                mediaTurma, freqMedia, aprovados, turma.getAlunosMatriculados().size());
     }
 
     private void relatorioPorProfessor() {
@@ -1091,7 +1049,7 @@ public class SistemaAlunos {
     private void saveTurmasToCsv() throws IOException {
         try (PrintWriter writer = new PrintWriter(new FileWriter("data/turmas.csv"))) {
             writer.println(
-                    "codigo,disciplinaCodigo,professorMatricula,semestre,metodoAvaliacao,presencial,sala,horario,capacidadeMaxima,totalAulas,alunosMatriculados,notas,faltas");
+                    "codigo,disciplinaCodigo,professorMatricula,semestre,metodoAvaliacao,presencial,sala,horario,capacidadeMaxima,totalAulas,alunosMatriculados");
 
             for (Disciplina disciplina : disciplinas) {
                 for (Turma turma : disciplina.getTurmas()) {
@@ -1099,24 +1057,7 @@ public class SistemaAlunos {
                             .map(Aluno::getMatricula)
                             .collect(Collectors.joining(";"));
 
-                    String notasStr = turma.getAlunosMatriculados().stream()
-                            .map(aluno -> {
-                                Map<String, Double> notas = turma.getNotas(aluno);
-                                if (notas.isEmpty())
-                                    return "";
-                                return aluno.getMatricula() + ":" +
-                                        notas.entrySet().stream()
-                                                .map(e -> e.getKey() + "=" + e.getValue())
-                                                .collect(Collectors.joining(","));
-                            })
-                            .filter(s -> !s.isEmpty())
-                            .collect(Collectors.joining(";"));
-
-                    String faltasStr = turma.getAlunosMatriculados().stream()
-                            .map(aluno -> aluno.getMatricula() + "=" + turma.getFaltas(aluno))
-                            .collect(Collectors.joining(";"));
-
-                    writer.println(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%s,%s,%s",
+                    writer.println(String.format("%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%s",
                             turma.getCodigo(),
                             disciplina.getCodigo(),
                             turma.getProfessor().getMatricula(),
@@ -1127,9 +1068,7 @@ public class SistemaAlunos {
                             turma.getHorario(),
                             turma.getCapacidadeMaxima(),
                             turma.getTotalAulas(),
-                            alunosStr,
-                            notasStr,
-                            faltasStr));
+                            alunosStr));
                 }
             }
         }
